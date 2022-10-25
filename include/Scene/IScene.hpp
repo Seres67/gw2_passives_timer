@@ -5,6 +5,13 @@
 #ifndef GW2_PASSIVES_TIMER_ISCENE_HPP
 #define GW2_PASSIVES_TIMER_ISCENE_HPP
 
+enum Scenes
+{
+    MainMenu,
+    Timer,
+    Settings,
+    Other
+};
 
 class IScene
 {
@@ -15,6 +22,5 @@ public:
 
     virtual void deinit() = 0;
 };
-
 
 #endif //GW2_PASSIVES_TIMER_ISCENE_HPP

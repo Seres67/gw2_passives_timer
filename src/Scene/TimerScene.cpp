@@ -44,8 +44,8 @@ int TimerScene::draw()
     updateCooldowns();
     ImGui::NewLine();
     if (ImGui::Button("Edit"))
-        return Gui::MainMenu;
-    return Gui::Timer;
+        return Scenes::MainMenu;
+    return Scenes::Timer;
 }
 
 void TimerScene::deinit()

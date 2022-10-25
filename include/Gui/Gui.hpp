@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI_H
+#define GUI_H
 
 #include <string>
 #include <vector>
@@ -21,13 +22,6 @@ public:
     void draw();
 
     void deinit();
-
-    enum
-    {
-        MainMenu,
-        Timer,
-        Settings
-    };
 private:
 
     std::vector<std::unique_ptr<IScene>> m_scenes;
@@ -35,5 +29,7 @@ private:
     bool m_mumble_init = false;
     bool m_show_ui = true;
     bool m_in_combat = false;
-    int m_active_scene = MainMenu;
+    int m_active_scene = Scenes::MainMenu;
 };
+
+#endif // GUI_H

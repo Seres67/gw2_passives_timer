@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MUMBLELINK_H
+#define MUMBLELINK_H
 
 #include <Windows.h>
 #include <cstdint>
@@ -131,3 +132,5 @@ public:
         if (mapObj != nullptr) CloseHandle(mapObj);
     };
 };
+
+#endif // MUMBLELINK_H

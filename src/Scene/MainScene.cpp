@@ -45,11 +45,13 @@ int MainScene::draw()
         ImGui::PopID();
     }
     if (ImGui::Button("Settings"))
-        return Gui::Settings;
+        return Scenes::Settings;
     ImGui::SameLine();
+    if (ImGui::Button("Other"))
+        return Scenes::Other;
     if (ImGui::Button("Confirm"))
-        return Gui::Timer;
-    return Gui::MainMenu;
+        return Scenes::Timer;
+    return Scenes::MainMenu;
 }
 
 void MainScene::deinit()

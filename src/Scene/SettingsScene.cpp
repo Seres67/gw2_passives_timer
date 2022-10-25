@@ -3,7 +3,6 @@
 //
 
 #include <Scene/SettingsScene.hpp>
-#include <Gui/Gui.hpp>
 #include <Addon/Addon.hpp>
 #include <Utils/Settings.hpp>
 
@@ -18,15 +17,15 @@ int SettingsScene::draw()
     for (char i = 0; i < 4; ++i)
         ImGui::Text("%x - %s", bindings[i], Passive::idToKeyname(i).c_str());
     if (ImGui::Button("Cancel"))
-        return Gui::MainMenu;
+        return Scenes::MainMenu;
     ImGui::SameLine();
     if (ImGui::Button("Save"))
     {
         char buffer[] = {0x06, 0x05, 0x56, static_cast<char>(0xDE)};
         Settings::writeSettings(buffer, 4);
-        return Gui::MainMenu;
+        return Scenes::MainMenu;
     }
-    return Gui::Settings;
+    return Scenes::Settings;
 }
 
 void SettingsScene::deinit()

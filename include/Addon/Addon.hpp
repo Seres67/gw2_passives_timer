@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADDON_H
+#define ADDON_H
 
 #include "gw2al_api.h"
 #include "gw2al_lib_imgui.h"
@@ -13,3 +14,5 @@ struct addon_instance
 };
 
 addon_instance &gAddon();
+
+#endif // ADDON_H

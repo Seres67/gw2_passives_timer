@@ -3,12 +3,14 @@
 #include <Scene/MainScene.hpp>
 #include <Scene/TimerScene.hpp>
 #include <Scene/SettingsScene.hpp>
+#include <Scene/OtherScene.hpp>
 
 void Gui::init()
 {
     m_scenes.emplace_back(std::make_unique<MainScene>());
     m_scenes.emplace_back(std::make_unique<TimerScene>());
     m_scenes.emplace_back(std::make_unique<SettingsScene>());
+    m_scenes.emplace_back(std::make_unique<OtherScene>());
     m_mumble_init = m_mumblelink.init();
     if (!m_mumble_init)
         gAddon().api->log_text(LL_ERR, (wchar_t *) L"gw2_passives_timer", (wchar_t *) L"MumbleLink couldn't initialize!");
@@ -73,10 +75,11 @@ void automount(MumbleLink mumble, bool &in_combat)
 
 void Gui::draw()
 {
-    if (GetAsyncKeyState(VK_LMENU) & 0xf000 && GetAsyncKeyState(VK_SHIFT) & 0xf000 && GetAsyncKeyState(0x52) & 1)
+    if (GetAsyncKeyState(0x52) & 1 && GetAsyncKeyState(VK_LMENU) & 0xf000 && GetAsyncKeyState(VK_SHIFT) & 0xf000)
         m_show_ui = !m_show_ui;
 //    automount(m_mumblelink, m_in_combat);
-    if (!m_show_ui)
+    auto map_open = (1 & (m_mumblelink.getContext()->uiState >> (1 - 1)));
+    if (!m_show_ui || map_open)
         return;
     ImGui::Begin("Passives timer", nullptr);
 
