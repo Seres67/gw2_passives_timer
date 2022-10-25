@@ -1,11 +1,10 @@
 #pragma once
-#include "stdafx.h"
 
-class Gui
+class Main
 {
 public:
 	void init();
-	void draw();
+
 	void deinit();
 };
 

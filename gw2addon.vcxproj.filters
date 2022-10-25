@@ -14,21 +14,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src/stdafx.h">
+    <ClInclude Include="include\targetver.hpp">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="src/targetver.h">
+    <ClInclude Include="include\Main\Main.hpp">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Main.h">
+    <ClInclude Include="include\Addon\Addon.hpp">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\addon.h">
+    <ClInclude Include="include\Gui\Gui.hpp">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Gui.h">
+    <ClInclude Include="include\Scene\IScene.hpp">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="include\Scene\MainScene.hpp">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scene\TimerScene.hpp">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClCompile Include="include\MumbleLink\MumbleLink.hpp">
+      <Filter>headers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Passive\Passive.hpp">
+      <Filter>headers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Utils\Serialize.hpp">
+      <Filter>headers</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Scene\SettingsScene.hpp">
+      <Filter>headers</Filter>
+    </ClCompile>
     <ClInclude Include="dep\imgui\imgui.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -40,13 +58,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src/stdafx.cpp">
+    <ClCompile Include="src\Addon\Addon.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\addon.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Main.cpp">
+    <ClCompile Include="src\Main\Main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="dep\imgui\imgui.cpp">
@@ -55,7 +70,16 @@
     <ClCompile Include="dep\imgui\imgui_draw.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gui.cpp">
+    <ClCompile Include="src\Gui\Gui.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\MainScene.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\TimerScene.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\SettingsScene.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

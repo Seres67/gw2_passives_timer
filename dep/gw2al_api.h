@@ -1,30 +1,36 @@
 #pragma once
 
+#define GW2AL_API_VER_MAJOR 1
+#define GW2AL_API_VER_MINOR 0
+
+#define GW2AL_CORE_DEP_ENTRY { L"loader_core", L"core gw2 al API", GW2AL_API_VER_MAJOR, GW2AL_API_VER_MINOR, 1, 0 }
+
 #define gw2al_hashed_name unsigned long long
 #define gw2al_event_id unsigned long
 
-typedef struct gw2al_addon_dsc {
-	const wchar_t* name;
-	const wchar_t* description;
-	unsigned char majorVer;
-	unsigned char minorVer;
-	unsigned int revision;
 
-	gw2al_addon_dsc* dependList;
+typedef struct gw2al_addon_dsc {
+    const wchar_t* name;
+    const wchar_t* description;
+    unsigned char majorVer;
+    unsigned char minorVer;
+    unsigned int revision;
+
+    gw2al_addon_dsc* dependList;
 } gw2al_addon_dsc;
 
 //api return codes
 
 typedef enum gw2al_api_ret {
-	GW2AL_OK,
-	GW2AL_FAIL,
-	GW2AL_IN_USE,
-	GW2AL_NOT_FOUND,
-	GW2AL_BAD_DLL,
-	GW2AL_DEP_NOT_LOADED,
-	GW2AL_DEP_OUTDATED,
-	GW2AL_DEP_STILL_LOADED,
-	GW2AL_STATIC_LIMIT_HIT
+    GW2AL_OK,
+    GW2AL_FAIL,
+    GW2AL_IN_USE,
+    GW2AL_NOT_FOUND,
+    GW2AL_BAD_DLL,
+    GW2AL_DEP_NOT_LOADED,
+    GW2AL_DEP_OUTDATED,
+    GW2AL_DEP_STILL_LOADED,
+    GW2AL_STATIC_LIMIT_HIT
 } gw2al_api_ret;
 
 //used to handle events
@@ -43,53 +49,57 @@ typedef void(*gw2al_api_event_handler)(void* data);
 #define GW2AL_CORE_FUNN_QUERY_EVENT 11
 #define GW2AL_CORE_FUNN_TRIGGER_EVENT 12
 #define GW2AL_CORE_FUNN_CLIENT_UNLOAD 13
-#define GW2AL_CORE_FUNN_LOG_TEXT 14
-#define GW2AL_CORE_FUNN_D3DCREATE_HOOK 15
+#define GW2AL_CORE_FUNN_LOG_TEXT_SYNC 14
+#define GW2AL_CORE_FUNN_LOG_TEXT 15
+#define GW2AL_CORE_FUNN_D3DCREATE_HOOK 16
+#define GW2AL_CORE_FUNN_D3D11CREATE_HOOK 17
+#define GW2AL_CORE_FUNN_DXGICREATE_HOOK 18
 
 typedef enum gw2al_log_level {
-	LL_INFO = 0,
-	LL_ERR,
-	LL_WARN,	
-	LL_DEBUG
+    LL_INFO = 0,
+    LL_ERR,
+    LL_WARN,
+    LL_DEBUG
 } gw2al_log_level;
 
 typedef struct gw2al_core_vtable {
-	//converts string to hash for usage in other functions
-	gw2al_hashed_name (*hash_name)(wchar_t* name);
+    //converts string to hash for usage in other functions
+    gw2al_hashed_name (*hash_name)(const wchar_t* name);
 
-	//register/unregister user functions to be called by other addons
-	gw2al_api_ret (*register_function)(void* function, gw2al_hashed_name name);
-	void (*unregister_function)(gw2al_hashed_name name);
+    //register/unregister user functions to be called by other addons
+    gw2al_api_ret (*register_function)(void* function, gw2al_hashed_name name);
+    void (*unregister_function)(gw2al_hashed_name name);
 
-	//query function pointer from registered list
-	void* (*query_function)(gw2al_hashed_name name);
+    //query function pointer from registered list
+    void* (*query_function)(gw2al_hashed_name name);
 
-	//fills table of functions using query_function
-	void (*fill_vtable)(gw2al_hashed_name* nameList, void** vtable);
-			
-	//functions to unload/load addons 
-	gw2al_api_ret (*unload_addon)(gw2al_hashed_name name);
-	gw2al_api_ret (*load_addon)(wchar_t* name);
+    //fills table of functions using query_function
+    void (*fill_vtable)(const gw2al_hashed_name* nameList, void** vtable);
 
-	//function to get currently loaded addon description
-	gw2al_addon_dsc* (*query_addon)(gw2al_hashed_name name);
-	
-	//simple event api 
-	//watch event can add a number of handlers on event name with priority 
-	//query event will get internal event id to speedup trigger_event calls
+    //functions to unload/load addons
+    gw2al_api_ret (*unload_addon)(gw2al_hashed_name name);
+    gw2al_api_ret (*load_addon)(const wchar_t* name);
 
-	gw2al_api_ret (*watch_event)(gw2al_event_id id, gw2al_hashed_name subscriber, gw2al_api_event_handler handler, unsigned int priority);
-	void (*unwatch_event)(gw2al_event_id id, gw2al_hashed_name subscriber);
-	gw2al_event_id (*query_event)(gw2al_hashed_name name);
-	unsigned int (*trigger_event)(gw2al_event_id id, void* data);
+    //function to get currently loaded addon description
+    gw2al_addon_dsc* (*query_addon)(gw2al_hashed_name name);
 
-	//unload function to delete properly unload things on client exit
+    //simple event api
+    //watch event can add a number of handlers on event name with priority
+    //query event will get internal event id to speedup trigger_event calls
 
-	void (*client_unload)();
+    gw2al_api_ret (*watch_event)(gw2al_event_id id, gw2al_hashed_name subscriber, gw2al_api_event_handler handler, unsigned int priority);
+    void (*unwatch_event)(gw2al_event_id id, gw2al_hashed_name subscriber);
+    gw2al_event_id (*query_event)(gw2al_hashed_name name);
+    unsigned int (*trigger_event)(gw2al_event_id id, void* data);
 
-	//simple logging function
+    //unload function to delete properly unload things on client exit
 
-	void (*log_text)(gw2al_log_level level, wchar_t* source, wchar_t* text);
+    void (*client_unload)();
+
+    //simple logging function
+
+    void (*log_text_sync)(gw2al_log_level level, const wchar_t* source, const wchar_t* text);
+    void (*log_text)(gw2al_log_level level, const wchar_t* source, const wchar_t* text);
 
 } gw2al_core_vtable;
 

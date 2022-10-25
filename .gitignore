@@ -34,3 +34,10 @@
 .vs/*
 bin/*
 *.vcxproj.user
+
+.idea/
+cmake-build*/
+CMakeLists.txt
+bin/
+x64/
+scripts/
