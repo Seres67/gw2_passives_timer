@@ -1,5 +1,5 @@
 //
-// Created bySeres67on 22/10/2022.
+// Created by Seres67 on 22/10/2022.
 //
 
 #include <Scene/TimerScene.hpp>

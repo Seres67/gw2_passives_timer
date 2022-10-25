@@ -1,5 +1,5 @@
 //
-// Created bySeres67on 23/10/2022.
+// Created by Seres67 on 23/10/2022.
 //
 
 #include <Scene/SettingsScene.hpp>

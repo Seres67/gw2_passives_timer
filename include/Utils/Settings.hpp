@@ -1,5 +1,5 @@
 //
-// Created bySeres67on 23/10/2022.
+// Created by Seres67 on 23/10/2022.
 //
 
 #ifndef GW2_PASSIVES_TIMER_SETTINGS_HPP
