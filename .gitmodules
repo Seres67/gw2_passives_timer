@@ -1,3 +1,6 @@
 [submodule "dep/imgui"]
 	path = dep/imgui
 	url = https://github.com/gw2-addon-loader/imgui
+[submodule "dep/openssl"]
+    path = dep/openssl
+    url = https://github.com/openssl/openssl
