@@ -3,7 +3,6 @@
 //
 #define CPPHTTPLIB_OPENSSL_SUPPORT
 
-
 #include <httplib.h>
 #include <Scene/OtherScene.hpp>
 #include <Addon/Addon.hpp>
@@ -28,7 +27,7 @@ int OtherScene::draw()
         switch (m_future.wait_for(std::chrono::milliseconds(1)))
         {
             case std::future_status::ready:
-                m_future_value = m_future.get();
+                m_future_value = nlohmann::json::parse(m_future.get());
                 break;
             case std::future_status::timeout:
                 ImGui::Text("Loading...");
@@ -38,7 +37,7 @@ int OtherScene::draw()
                 break;
         }
     } else
-        ImGui::Text("%s", m_future_value.c_str());
+        ImGui::Text("%s", m_future_value["name"].get<std::string>().c_str());
     if (ImGui::Button("Back"))
         return Scenes::MainMenu;
     return Scenes::Other;

@@ -5,11 +5,12 @@
 #ifndef GW2_PASSIVES_TIMER_OTHERSCENE_HPP
 #define GW2_PASSIVES_TIMER_OTHERSCENE_HPP
 
-#include "IScene.hpp"
 #include <memory>
 #include <functional>
 #include <thread>
 #include <future>
+#include <nlohmann/json.hpp>
+#include "IScene.hpp"
 
 namespace httplib
 {
@@ -28,8 +29,9 @@ public:
     using Deleter = std::function<void(httplib::Client *)>;
     std::unique_ptr<httplib::Client, Deleter> m_client;
     std::promise<std::string> m_promise;
+private:
     std::future<std::string> m_future;
-    std::string m_future_value;
+    nlohmann::json m_future_value;
 };
 
 
